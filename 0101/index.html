@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>탭 메뉴 연습</title>
+
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        a {text-decoration: none;}
+        ul, ol, li {list-style: none;}
+        .tab-box {width: 100%; height: 500px; padding-top: 50px;}
+        .tab-box .tab {display: flex; justify-content: center; position: relative;}
+        .tab-box .tab .tab-btn {display: flex; margin: 0 auto; background-color: #fff; height: 1px;}
+        .tab-box .tab .tab-btn li {width: 42px; height: 100%; display: flex; align-items: center; position: relative;}
+        .tab-box .tab .tab-btn li:not(:first-of-type, :last-of-type) {justify-content: center; width: 84px;}
+        .tab-box .tab .tab-btn li:last-of-type {justify-content: end;}
+        .tab-box .tab .tab-btn li span {position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%);}
+        .tab-box .tab .tab-btn li:last-of-type span {left: auto; right: -10px; transform: none;}
+        .tab-box .tab .tab-btn li:first-of-type span {left: -10px; transform: none;}
+        .tab-box .tab .tab-btn li.on img {filter: invert(42%) sepia(70%) saturate(2262%) hue-rotate(326deg) brightness(90%) contrast(95%); transition: .5s;}
+        /* .tab-box .tab .tab-btn li.on span {font-weight: 700; font-size: 20px;} */
+        .tab-box .tab .active-bar {position: absolute; width: 0; height: 1px; background-color: #e14b56; top: 50%; transform: translateY(-50%); left: 0; transition: .5s;}
+    </style>
+
+    <script>
+        window.onload=function(){
+            const tabs = document.querySelectorAll(".tab-btn li");
+            const bar = document.querySelector(".active-bar");
+            // const brand_contents =document.querySelectorAll(".brand_content>div");
+            // const brand_txt = document.querySelector(".brand_title");
+
+            bar.style.left = tabs[0].offsetLeft + "px";
+            bar.style.width = tabs[0].offsetWidth + "px";
+            bar.style.top = tabs[0].offsetTop + tabs[0].offsetHeight + "px";
+
+            tabs.forEach((el, index)=>{
+                el.addEventListener("click", (e)=> {
+                    let bar_index = 1;
+                    e.preventDefault();
+                    tabs.forEach((el)=>{
+                        el.classList.remove("on");
+                    })
+                    el.classList.add("on");
+
+                    bar.style.left = e.currentTarget.offsetLeft + "px";
+                    bar.style.width = e.currentTarget.offsetWidth + "px";
+                    bar.style.top = e.currentTarget.offsetTop + e.currentTarget.offsetHeight + "px";
+
+
+                    // brand_contents.forEach((el)=>{
+                    //     el.classList.remove("on");
+                    // })
+                    // brand_contents[index].classList.add("on");
+                })
+            })
+        }
+    </script>
+</head>
+<body>
+    <div class="tab-box" style="background-color: #a1b8f7;">
+        <div class="tab">
+            <div class="active-bar"></div>
+            <ul class="tab-btn">
+                <li class="on">
+                    <img src="./star.svg" alt="">
+                    <span>#01</span>
+                </li>
+                <li>
+                    <img src="./star.svg" alt="">
+                    <span>#02</span>
+                </li>
+                <li>
+                    <img src="./star.svg" alt="">
+                    <span>#03</span>
+                </li>
+                <li>
+                    <img src="./star.svg" alt="">
+                    <span>#04</span>
+                </li>
+                <li>
+                    <img src="./star.svg" alt="">
+                    <span>#05</span>
+                </li>
+                <li>
+                    <img src="./star.svg" alt="">
+                    <span>#06</span>
+                </li>
+                <li>
+                    <img src="./star.svg" alt="">
+                    <span>#07</span>
+                </li>
+            </ul>
+        </div>
+
+        <ul class="tab-arrow">
+            <li><a href=""><</a></li>
+            <li><a href="">></a></li>
+        </ul>
+        <ul class="tab-content"></ul>
+    </div>
+</body>
+</html>
